@@ -20,7 +20,7 @@ const SearchPage = () => {
       setNutrientsList(nutrientsList);
     };
   }, []);
-
+  console.log(1)
   return (
     <div className="App">
       <SearchBar />
