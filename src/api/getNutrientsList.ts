@@ -8,6 +8,6 @@ export interface NutrientsListType {
 
 export const getNutrientsList = async () => {
   const { data } = await axios.get('http://localhost:8000/nutrientsList');
-  const { nutrientsList } = data;
-  return nutrientsList;
+  //const { nutrientsList } = data; 수정
+  return data;
 };
