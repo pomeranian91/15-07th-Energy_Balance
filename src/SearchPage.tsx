@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
+import Sort from './components/sort/Sort';
 import Categories from './components/categories/Categories';
 import ProductList from './components/productList/ProductList';
 import SearchBar from './components/searchBar/SearchBar';
@@ -45,6 +46,7 @@ const SearchPage: React.FC = () => {
         changeNutrientsList={changeNutrientsList}
         handleSubmitSearchValue={handleSubmitSearchValue}
       />
+      <Sort changeNutrientsList={changeNutrientsList} />
       <Categories
         nutrientsList={nutrientsList}
         changeNutrientsList={changeNutrientsList}
