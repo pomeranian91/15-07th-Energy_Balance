@@ -1,13 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import type { NutrientsListType } from '../api/getNutrientsList';
 import type { CategoriesProps } from '../components/categories/Categories.type';
 import { getTarget } from '../utils/getTarget';
 
 type checkboxInfo = { checked: boolean; cnt?: number };
 
-const useCategories = ({ nutrientsList, changeNutrientsList }: CategoriesProps) => {
+const useCategories = ({ nutrientsList, changeNutrientsList, currentKeyword }: CategoriesProps) => {
+  const [initialNutrientsList, setInitialNutrientsList] = useState<NutrientsListType[] | null>(null);
   const [checkboxInfoList, setCheckboxInfoList] = useState<[any, checkboxInfo][] | null>(null);
   const [checkboxInfo, setCheckboxInfo] = useState<Map<any, checkboxInfo> | null | undefined>(null);
+  const [prevKeyword, setPrevKeyword] = useState<string>('initial');
 
   const filterCheckboxInfo = (nutrientsList: NutrientsListType[]) => {
     const parseCategories = nutrientsList.filter((nutrients) => nutrients.brand);
@@ -42,9 +44,9 @@ const useCategories = ({ nutrientsList, changeNutrientsList }: CategoriesProps) 
   };
 
   const updateNutrientsList = (checkboxInfoList: [any, checkboxInfo][] | null) => {
-    const selectedBrands = checkboxInfoList?.filter(([key, val]) => val.checked).map((info) => info[0]);
+    const selectedBrands = checkboxInfoList?.filter(([_, val]) => val.checked).map((info) => info[0]);
 
-    const newNutrientsList = nutrientsList?.filter((nutrients) => selectedBrands?.includes(nutrients.brand));
+    const newNutrientsList = initialNutrientsList?.filter((nutrients) => selectedBrands?.includes(nutrients.brand));
 
     return newNutrientsList;
   };
@@ -54,6 +56,14 @@ const useCategories = ({ nutrientsList, changeNutrientsList }: CategoriesProps) 
       const newCheckboxInfo = filterCheckboxInfo(nutrientsList);
 
       setCheckboxInfo(newCheckboxInfo);
+    }
+
+    setPrevKeyword(currentKeyword);
+  }, [currentKeyword]);
+
+  useEffect(() => {
+    if (currentKeyword !== prevKeyword) {
+      setInitialNutrientsList(nutrientsList);
     }
   }, [nutrientsList]);
 
@@ -67,7 +77,10 @@ const useCategories = ({ nutrientsList, changeNutrientsList }: CategoriesProps) 
   useEffect(() => {
     if (checkboxInfoList) {
       const updatedNutrientsList = updateNutrientsList(checkboxInfoList);
-      changeNutrientsList(updatedNutrientsList);
+      const emptyNutrientsList = updatedNutrientsList?.length === 0;
+
+      if (emptyNutrientsList) changeNutrientsList(initialNutrientsList as NutrientsListType[]);
+      else changeNutrientsList(updatedNutrientsList);
     }
   }, [checkboxInfoList]);
 
