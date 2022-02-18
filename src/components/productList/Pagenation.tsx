@@ -26,9 +26,7 @@ const Pagination = ({ paginate, postPerPage, nutrientsList, totalPosts }: Props)
                 </List>
               ))}
             </ListContainer>
-          ) : (
-            <div>test</div>
-          )}
+          ) : null}
         </div>
       );
     } else return null;
@@ -36,6 +34,8 @@ const Pagination = ({ paginate, postPerPage, nutrientsList, totalPosts }: Props)
 };
 const ListContainer = styled.ul`
   display: flex;
+  justify-content: center;
+  margin-right: 350px;
 `;
 const List = styled.li`
   display: flex;
@@ -44,7 +44,7 @@ const List = styled.li`
   margin: 5px;
   width: 40px;
   height: 40px;
-  background: #ffffff;
+  background: #f2e9e4;
   border-radius: 50%;
   box-shadow: -2px -2px 5px rgba(255, 255, 255, 1), 3px 3px 5px rgba(0, 0, 0, 0.1);
   cursor: pointer;

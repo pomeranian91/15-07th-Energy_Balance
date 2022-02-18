@@ -10,13 +10,14 @@ interface SearchBarProps {
 
 const SearchBar = ({ defaultNutrientsList, changeNutrientsList, changeCurrentKyeword }: SearchBarProps) => {
   const [nutrientsList, setNutrientsList] = useState<NutrientsListType[] | null>(defaultNutrientsList);
+  const [searchName, setSearchName] = useState<string>('');
   const [isClientSearching, setIsClientSearching] = useState<boolean>(false);
 
-  const handleSubmitSearchValue = (e: any): void => {
-    //any 타입 임시
-    // => React.FormEvent<HTMLFormElement>
+  const handleSubmitSearchValue = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    const { value } = e.target[0];
+    const formTarget = e.target as HTMLFormElement;
+    const inputTarget = formTarget[0] as HTMLInputElement;
+    const { value } = inputTarget;
     setIsClientSearching(false);
     changeCurrentKyeword(value); // PR 충돌
     if (!value || value === ' ') return;
@@ -26,9 +27,11 @@ const SearchBar = ({ defaultNutrientsList, changeNutrientsList, changeCurrentKye
     } else {
       console.log(`"${value}"에 해당하는 제품을 찾을 수 없습니다.`);
     }
+    setSearchName('');
   };
 
   const handleChangeSearchValue = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    setSearchName(event.target.value);
     if (event.target.value === '') {
       setIsClientSearching(false);
     } else {
@@ -62,7 +65,11 @@ const SearchBar = ({ defaultNutrientsList, changeNutrientsList, changeCurrentKye
   return (
     <SearchBarWrapper>
       <SearchBarForm onSubmit={(e) => handleSubmitSearchValue(e)}>
-        <SearchInput onChange={handleChangeSearchValue} placeholder="Energy Balnace 제품 검색하기"></SearchInput>
+        <SearchInput
+          onChange={handleChangeSearchValue}
+          value={searchName}
+          placeholder="Energy Balnace 제품명 검색하기"
+        ></SearchInput>
         <SearchBtn type="submit">
           <SearchIcon alt="search-icon" src="/images/icon-search.jpg" />
         </SearchBtn>
@@ -90,46 +97,64 @@ const SearchBarForm = styled.form`
   display: flex;
   width: 561px;
   padding-top: 40px;
+  @media screen and (max-width: 768px) {
+    width: 350px;
+  }
 `;
 
 const SearchInput = styled.input`
   width: 561px;
   height: 44px;
   padding: 0 40px;
+  border: none;
   border-radius: 22px;
-  background-color: #ffffff;
+  box-shadow: -2px -2px 5px rgba(255, 255, 255, 1), 3px 3px 5px rgba(0, 0, 0, 0.1);
+  background-color: #f2e9e4;
+  cursor: pointer;
+  &:focus {
+    outline: none;
+  }
 `;
 
 const SearchBtn = styled.button`
+  position: relative;
+  right: 50px;
   padding: 0;
-  background-color: initial;
+  background-color: transparent;
   border-style: none;
+  cursor: pointer;
 `;
 
 const SearchIcon = styled.img`
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  border: none;
 `;
 
 const SerachResultUl = styled.ul`
   position: absolute;
   top: 85px;
-  width: 510px;
+  width: 480px;
   min-height: 200px;
   margin: 0;
-  margin-right: 20px;
-  padding: 20px 0;
-  background-color: whitesmoke; //#ffffff;
+  margin-right: 40px;
+  padding: 10px 0;
+  color: #f2e9e4;
+  background-color: #3c3b40;
+  border-radius: 10px;
   list-style: none;
   z-index: 99;
+  @media screen and (max-width: 768px) {
+    width: 280px;
+  }
 `;
 
 const SearchResultLi = styled.li`
-  margin: 5px 0;
-  padding: 3px 20px;
+  padding: 6px 20px;
+  cursor: pointer;
   &:hover {
-    background: #dbdbdb;
+    background: #242326;
   }
 `;
 

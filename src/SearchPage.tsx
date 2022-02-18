@@ -27,41 +27,46 @@ const SearchPage: React.FC = () => {
     };
     getAsyncNutrientsList();
   }, []);
-  useEffect(() => {
-    console.log(nutrientsList);
-  }, [nutrientsList]);
+
   return (
-    <div className="App">
+    <Container>
       <SearchBar
         defaultNutrientsList={defaultNutrientsList}
         changeNutrientsList={changeNutrientsList}
         changeCurrentKyeword={changeCurrentKyeword}
       />
       <Sort nutrientsList={nutrientsList} changeNutrientsList={changeNutrientsList} />
+
       <Layout>
         <Categories
           nutrientsList={nutrientsList}
           changeNutrientsList={changeNutrientsList}
           currentKeyword={currentKeyword}
         />
-        <ProductList nutrientsList={nutrientsList} />
+        <ProductLayout>
+          <ProductList nutrientsList={nutrientsList} />
+        </ProductLayout>
       </Layout>
-    </div>
+    </Container>
   );
 };
-
+const Container = styled.div`
+  min-height: 1000px;
+  background: #f2e9e4;
+`;
 const Layout = styled.div`
   display: flex;
-  z-index: 5;
-  background-color: ;
+  justify-content: center;
+  margin-left: 20px;
+  padding-left: 30px;
+  margin-right: 20px;
+  padding-right: 30px;
+  border-radius: 10px;
+  background: #d9c7c1;
+  box-shadow: -2px -2px 5px rgba(245, 245, 245, 0.9), 3px 3px 5px rgba(3, 3, 3, 0.2);
+  @media screen and (max-width: 1024px) {
+    flex-direction: column;
+  }
 `;
-// const Test = styled.video`
-//   // position: absolute;
-//   // top: 0;
-//   // left: 0;
-//   // width: 100%;
-//   // height: 100%;
-//   // background: url(https://source.unsplash.com/random/1920x1080);
-//   // background-size: cover;
-// `;
+const ProductLayout = styled.div``;
 export default SearchPage;

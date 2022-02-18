@@ -61,19 +61,26 @@ const Layout = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: center;
-  width: 90%;
-  margin-left: 100px;
+  width: 100%;
+  @media screen and (max-width: 1024px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 const Card = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  min-width: 235px;
+  justify-content: center;
+  align-items: center;
+  width: 280px;
+  margin: 20px;
   padding: 20px;
-  background-color: #fff;
+  color: #242326;
+  background-color: #f2e9e4;
   box-shadow: -2px -2px 5px rgba(255, 255, 255, 1), 3px 3px 5px rgba(0, 0, 0, 0.1);
   cursor: pointer;
+
   &: hover {
     box-shadow: inset -2px -2px 5px rgba(255, 255, 255, 1), inset 3px 3px 5px rgba(0, 0, 0, 0.1);
     transform: scale(1.2);
@@ -81,18 +88,23 @@ const Card = styled.div`
   }
 `;
 const Title = styled.div`
+  margin-top: 5px;
   font-size: 13px;
   font-weight: bold;
   font-family: Poppins;
 `;
 const Brand = styled.div`
+  margin-top: 2px;
   font-size: 13px;
   font-weight: bold;
   font-family: Poppins;
 `;
-const Price = styled.div``;
+const Price = styled.div`
+  margin-top: 2px;
+  color: #242326;
+`;
 const CardImg = styled.img`
-  max-width: 235px;
+  width: 260px;
 `;
 const DeletePrice = styled.p`
   font-size: 13px;
@@ -104,8 +116,11 @@ const ProductPrice = styled.p`
   font-weight: bold;
   font-family: Poppins;
 `;
-const IconContainer = styled.div``;
+const IconContainer = styled.div`
+  margin-top: 2px;
+`;
 const IconTag = styled.img`
+  margin: 2px;
   border: none;
   vertical-align: top;
 `;
