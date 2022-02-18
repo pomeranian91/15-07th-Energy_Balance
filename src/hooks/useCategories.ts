@@ -93,7 +93,7 @@ const useCategories = ({ nutrientsList, changeNutrientsList, currentKeyword }: C
             if (filteredProduct[0] === product[0]) _newCheckboxInfoList.push(product);
           }
         }
-        console.log(_newCheckboxInfoList);
+
         setSearchCheckboxInfoList(_newCheckboxInfoList);
       }
     }
@@ -104,8 +104,9 @@ const useCategories = ({ nutrientsList, changeNutrientsList, currentKeyword }: C
       const updatedNutrientsList = updateNutrientsList(checkboxInfoList);
       const emptyNutrientsList = updatedNutrientsList?.length === 0;
 
-      if (emptyNutrientsList) changeNutrientsList(initialNutrientsList as NutrientsListType[]);
-      else changeNutrientsList(updatedNutrientsList);
+      if (emptyNutrientsList) {
+        changeNutrientsList(initialNutrientsList as NutrientsListType[]);
+      } else changeNutrientsList(updatedNutrientsList);
     }
   }, [checkboxInfoList]);
 

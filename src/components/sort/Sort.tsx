@@ -10,13 +10,14 @@ const Sort: React.FC<SortProps> = ({ nutrientsList, changeNutrientsList }: SortP
     <S.Container>
       <S.Info>정렬</S.Info>
       <S.SortList onClick={selectSort}>
-        {sortList?.map((sort, index) => {
-          return (
-            <S.SortName key={index} id={sort.name} selected={sort.selected}>
-              {sort.name}
-            </S.SortName>
-          );
-        })}
+        {sortList &&
+          sortList?.map((sort, index) => {
+            return (
+              <S.SortName key={index} id={sort.name} selected={sort.selected}>
+                {sort.name}
+              </S.SortName>
+            );
+          })}
       </S.SortList>
     </S.Container>
   );
