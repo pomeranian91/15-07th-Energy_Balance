@@ -4,7 +4,7 @@ import * as S from './Sort.style';
 import type { SortProps } from './Sort.type';
 
 const Sort: React.FC<SortProps> = ({ nutrientsList, changeNutrientsList }: SortProps) => {
-  const { sortList, selectSort } = useSort();
+  const { sortList, selectSort } = useSort(nutrientsList);
 
   return (
     <S.Container>
