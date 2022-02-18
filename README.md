@@ -1,12 +1,11 @@
 # Team15-wanted-pre-onboarding-15_07th_Energy_Balance
-## **1. 💁 프로젝트 소개**
+## 1. 💁 프로젝트 소개
 
 - 주제 : 3주차 에너지 밸런스 프로젝트
 - 기간 : 22.02.17 ~ 22.02.19
 
 ---
-
-
+## 2. 🛠️ 기술 스택
 <p align="center">
 <img alt="JavaScript" src="https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E" />
 <img alt="TypeScript" src = "https://img.shields.io/badge/TypeScript-%231572B6.svg?style=for-the-badge&logo=TypeScript&logoColor=white" />
@@ -23,17 +22,17 @@
 |<img width="200px" src='https://avatars.githubusercontent.com/u/66837741?v=4'/>|<img width="200px" src="https://avatars.githubusercontent.com/u/65222200?v=4"/>|<img width="200px" src='https://avatars.githubusercontent.com/u/89348550?v=4'>|
 ---
 
-## 4**. 🔗 배포 링크**
+## 4. 🔗 배포 링크
 
 [배포 링크 바로가기]
 
 ---
 
-## 5**. 📄 기능 목록 명세**
+## 5. 📄 기능 목록 명세
 
-### **1. 기능 분배**
+### 1. 기능 분배
 
-### 1) **검색 기능(조은총)**
+### 1) 검색 기능(조은총)
 
 [키워드 입력]
 
@@ -43,7 +42,7 @@
 
 - 
 
-### 2**) 카테고리 및 정렬 기능(최병현)**
+### 2) 카테고리 및 정렬 기능(최병현)
 
 [카테고리]
 
@@ -55,7 +54,7 @@
 - 정렬 버튼 클릭 시 clicked 식별 props를 사용하여 스타일 하이라이트 처리되도록 동적 렌더링
 - 현재 정렬 기준에 따라 상품 리스트를 오름 차순 또는 내림 차순 으로 정렬
 
-### 3**) 상품 리스트(조용우)**
+### 3) 상품 리스트(조용우)
 
 [리스트 나열]
 
@@ -69,7 +68,7 @@
 
 ---
 
-## 6**. 💿 설치 및 실행 방법**
+## 6. 💿 설치 및 실행 방법
 
 Project Clone
 
@@ -85,7 +84,7 @@ Project Start For Development
 
 ---
 
-## 7**. 🌲 프로젝트 구조**
+## 7. 🌲 프로젝트 구조
 
 ```
 📦src
@@ -117,7 +116,7 @@ Project Start For Development
  ┗ 📜index.tsx
 ```
 
-## **8. 📕 레퍼런스**
+## 8. 📕 레퍼런스
 
 - 이 프로젝트는 <u>[원티드 프론트엔드 프리온보딩](https://www.wanted.co.kr/events/pre_onboarding_course_6) 기업 과제를 토대로 만들었습니다.
 - 실무수준의 프로젝트이지만 학습용으로 만들었기 때문에 이 코드를 활용하여 이득을 취하거나 무단 배포할 경우 법적으로 문제될 수 있습니다.
