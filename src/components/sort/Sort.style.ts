@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { SortNameType } from './Sort.type';
 
 export const Container = styled.div`
   display: flex;
@@ -21,11 +22,11 @@ export const SortList = styled.ul`
   display: flex;
 `;
 
-export const SortName = styled.li`
+export const SortName = styled.li<SortNameType>`
   display: list-item;
   margin-right: 10px;
   font-size: 13px;
-  font-weight: 400;
-  color: #999999;
+  font-weight: ${({ selected }) => (selected ? '600' : '400')};
+  color: ${({ selected }) => (selected ? '#F8D09A' : '#999999')};
   cursor: pointer;
 `;

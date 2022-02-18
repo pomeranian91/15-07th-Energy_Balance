@@ -5,7 +5,6 @@ import Categories from './components/categories/Categories';
 import ProductList from './components/productList/ProductList';
 import SearchBar from './components/searchBar/SearchBar';
 import { getNutrientsList, NutrientsListType } from './api/getNutrientsList';
-import { DefaultDeserializer } from 'v8';
 
 const SearchPage: React.FC = () => {
   const [defaultNutrientsList, setDefaultNutrientsList] = useState<NutrientsListType[] | null>(null); // 고정된 nuetrientsList mount이외에 setNutrientsList
@@ -46,7 +45,7 @@ const SearchPage: React.FC = () => {
         changeNutrientsList={changeNutrientsList}
         handleSubmitSearchValue={handleSubmitSearchValue}
       />
-      <Sort changeNutrientsList={changeNutrientsList} />
+      <Sort nutrientsList={nutrientsList} changeNutrientsList={changeNutrientsList} />
       <Categories
         nutrientsList={nutrientsList}
         changeNutrientsList={changeNutrientsList}
