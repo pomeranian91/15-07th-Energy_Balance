@@ -3,7 +3,6 @@ import Categories from './components/categories/Categories';
 import ProductList from './components/productList/ProductList';
 import SearchBar from './components/searchBar/SearchBar';
 import { getNutrientsList, NutrientsListType } from './api/getNutrientsList';
-import { DefaultDeserializer } from 'v8';
 import styled from 'styled-components';
 
 const SearchPage: React.FC = () => {
