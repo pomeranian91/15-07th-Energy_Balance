@@ -34,8 +34,8 @@ export const Category = styled.li`
 
 export const CheckboxContainer = styled.div`
   display: inline-block;
-  max-width: 34px;
-  max-height: 34px;
+  max-width: 24px;
+  max-height: 24px;
 
   vertical-align: middle;
   margin-right: 20px;
