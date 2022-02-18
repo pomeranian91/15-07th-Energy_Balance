@@ -11,6 +11,7 @@ interface Props {
 
 const Pagination = ({ paginate, postPerPage, nutrientsList, totalPosts }: Props) => {
   const pageNumbers: number[] = [];
+  console.log(1);
   for (let i = 1; i < Math.ceil(totalPosts / postPerPage); i++) {
     pageNumbers.push(i);
   }
