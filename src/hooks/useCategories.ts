@@ -93,7 +93,7 @@ const useCategories = ({ nutrientsList, changeNutrientsList, currentKeyword }: C
             if (filteredProduct[0] === product[0]) _newCheckboxInfoList.push(product);
           }
         }
-        console.log(_newCheckboxInfoList);
+
         setSearchCheckboxInfoList(_newCheckboxInfoList);
       }
     }
@@ -105,7 +105,6 @@ const useCategories = ({ nutrientsList, changeNutrientsList, currentKeyword }: C
       const emptyNutrientsList = updatedNutrientsList?.length === 0;
 
       if (emptyNutrientsList) {
-        if (currentKeyword === 'initial') return;
         changeNutrientsList(initialNutrientsList as NutrientsListType[]);
       } else changeNutrientsList(updatedNutrientsList);
     }
