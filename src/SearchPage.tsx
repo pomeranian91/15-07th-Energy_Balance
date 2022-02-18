@@ -17,23 +17,9 @@ const SearchPage: React.FC = () => {
     setNutrientsList(targetNutrientsList);
   };
 
-  const handleSubmitSearchValue = useCallback(
-    (e: any): void => {
-      //any 타입 임시
-      // => React.FormEvent<HTMLFormElement>
-      e.preventDefault();
-      const { value } = e.target[0];
-      setCurrentKeyword(value); // PR 충돌
-      if (!value || value === ' ') return;
-      const filteredNutrients = defaultNutrientsList?.filter((nutrients) => nutrients.name.includes(value));
-      if (filteredNutrients?.length) {
-        changeNutrientsList(filteredNutrients); //이 함수 안에 setState값이 들어있어서 일단 밖으로
-      } else {
-        console.log(`"${value}"에 해당하는 제품을 찾을 수 없습니다.`);
-      }
-    },
-    [changeNutrientsList],
-  );
+  const changeCurrentKyeword = (value: string) => {
+    setCurrentKeyword(value);
+  };
 
   useEffect(() => {
     const getAsyncNutrientsList = async () => {
@@ -47,6 +33,11 @@ const SearchPage: React.FC = () => {
   return (
     <div className="App">
       <SearchBar
+        defaultNutrientsList={defaultNutrientsList}
+        changeNutrientsList={changeNutrientsList}
+        changeCurrentKyeword={changeCurrentKyeword}
+      />
+      <Categories
         nutrientsList={nutrientsList}
         changeNutrientsList={changeNutrientsList}
         handleSubmitSearchValue={handleSubmitSearchValue}
