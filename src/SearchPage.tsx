@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
-import { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import styled from 'styled-components';
 import Sort from './components/sort/Sort';
 import Categories from './components/categories/Categories';
 import ProductList from './components/productList/ProductList';
 import SearchBar from './components/searchBar/SearchBar';
 import { getNutrientsList, NutrientsListType } from './api/getNutrientsList';
+
 
 const SearchPage: React.FC = () => {
   const [defaultNutrientsList, setDefaultNutrientsList] = useState<NutrientsListType[] | null>(null); // 고정된 nuetrientsList mount이외에 setNutrientsList
@@ -16,18 +17,23 @@ const SearchPage: React.FC = () => {
     setNutrientsList(targetNutrientsList);
   };
 
-  const handleSubmitSearchValue = (e: any): void => {
-    // React.FormEvent<HTMLFormElement> //any 타입 임시
-    e.preventDefault();
-    const { value } = e.target[0];
-
-    setCurrentKeyword(value);
-
-    const filteredNutrients = defaultNutrientsList?.filter((nutrients) => nutrients.name.includes(value));
-    if (filteredNutrients) {
-      changeNutrientsList(filteredNutrients);
-    }
-  };
+  const handleSubmitSearchValue = useCallback(
+    (e: any): void => {
+      //any 타입 임시
+      // => React.FormEvent<HTMLFormElement>
+      e.preventDefault();
+      const { value } = e.target[0];
+      setCurrentKeyword(value); // PR 충돌
+      if (!value || value === ' ') return;
+      const filteredNutrients = defaultNutrientsList?.filter((nutrients) => nutrients.name.includes(value));
+      if (filteredNutrients?.length) {
+        changeNutrientsList(filteredNutrients); //이 함수 안에 setState값이 들어있어서 일단 밖으로
+      } else {
+        console.log(`"${value}"에 해당하는 제품을 찾을 수 없습니다.`);
+      }
+    },
+    [changeNutrientsList],
+  );
 
   useEffect(() => {
     const getAsyncNutrientsList = async () => {
@@ -45,15 +51,20 @@ const SearchPage: React.FC = () => {
         changeNutrientsList={changeNutrientsList}
         handleSubmitSearchValue={handleSubmitSearchValue}
       />
-      <Sort nutrientsList={nutrientsList} changeNutrientsList={changeNutrientsList} />
-      <Categories
-        nutrientsList={nutrientsList}
-        changeNutrientsList={changeNutrientsList}
-        currentKeyword={currentKeyword}
-      />
-      <ProductList />
+      <Layout>
+        <Sort nutrientsList={nutrientsList} changeNutrientsList={changeNutrientsList} />
+        <Categories
+          nutrientsList={nutrientsList}
+          changeNutrientsList={changeNutrientsList}
+          currentKeyword={currentKeyword}
+        />
+        <ProductList nutrientsList={nutrientsList} />
+      </Layout>
     </div>
   );
 };
 
+const Layout = styled.div`
+  display: flex;
+`;
 export default SearchPage;

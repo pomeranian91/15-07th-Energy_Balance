@@ -5,6 +5,7 @@ const GlobalStyle = createGlobalStyle`
   ${reset}
   * {
       box-sizing: border-box;
+      font-family: 'Poppins','Noto Sans KR',"Helvetica","sans-serif";
   }
 `;
 
