@@ -14,7 +14,7 @@ const SearchPage = () => {
     console.log('용우님이 쓰실 필터된 객체배열입니다.', targetNutrientsList);
     setNutrientsList(targetNutrientsList);
   };
-
+  console.log(nutrientsList);
   const handleSubmitSearchValue = (e: any): void => {
     // React.FormEvent<HTMLFormElement> //any 타입 임시
     e.preventDefault();
