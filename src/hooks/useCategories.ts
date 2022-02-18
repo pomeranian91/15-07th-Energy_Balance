@@ -22,6 +22,8 @@ const useCategories = ({ nutrientsList, changeNutrientsList, currentKeyword }: C
         filtedCheckboxInfo.set(brand, { ...filtedCheckboxInfo.get(brand), cnt: filtedCheckboxInfo.get(brand).cnt + 1 });
     }
 
+    setPrevKeyword('');
+
     return filtedCheckboxInfo;
   };
 
@@ -52,20 +54,20 @@ const useCategories = ({ nutrientsList, changeNutrientsList, currentKeyword }: C
   };
 
   useEffect(() => {
-    if (nutrientsList) {
-      const newCheckboxInfo = filterCheckboxInfo(nutrientsList);
+    if (currentKeyword !== prevKeyword || prevKeyword === 'initial') {
+      setInitialNutrientsList(nutrientsList);
+    }
+  }, [nutrientsList]);
+
+  useEffect(() => {
+    if (initialNutrientsList) {
+      const newCheckboxInfo = filterCheckboxInfo(initialNutrientsList);
 
       setCheckboxInfo(newCheckboxInfo);
     }
 
-    setPrevKeyword(currentKeyword);
-  }, [currentKeyword]);
-
-  useEffect(() => {
-    if (currentKeyword !== prevKeyword) {
-      setInitialNutrientsList(nutrientsList);
-    }
-  }, [nutrientsList]);
+    if (prevKeyword !== 'initial') setPrevKeyword(currentKeyword);
+  }, [currentKeyword, initialNutrientsList]);
 
   useEffect(() => {
     if (checkboxInfo) {

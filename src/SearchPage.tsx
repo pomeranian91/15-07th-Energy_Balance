@@ -32,7 +32,7 @@ const SearchPage: React.FC = () => {
   useEffect(() => {
     const getAsyncNutrientsList = async () => {
       const nutrientsList = await getNutrientsList();
-      // setNutrientsList(nutrientsList);
+      setNutrientsList(nutrientsList);
       setDefaultNutrientsList(nutrientsList);
     };
     getAsyncNutrientsList();
