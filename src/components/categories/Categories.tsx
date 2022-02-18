@@ -1,37 +1,39 @@
 import React from 'react';
+import * as S from './Categories.style';
+import useCategories from '../../hooks/useCategories';
+import type { CategoriesProps } from './Categories.type';
 import { NutrientsListType } from '../../api/getNutrientsList';
 
-interface CategoriesProps  {
-  nutrientsList: NutrientsListType[] | null;
-  changeNutrientsList(targetNutrientsList: NutrientsListType[] | undefined): void;
-}
+const Categories: React.FC<CategoriesProps> = ({ nutrientsList, changeNutrientsList }: CategoriesProps) => {
+  const { checkboxInfo } = useCategories(nutrientsList);
 
-const Categories: React.FC<CategoriesProps> = ({nutrientsList, changeNutrientsList}: CategoriesProps) => {
+  console.log(checkboxInfo);
+
   return (
-    <Container>
-      <SearchBar />
-      <CategoryList>
-              <Category>
-                <CheckboxContainer className="checkboxContainer">
-                  <HiddenCheckbox
-                    defaultChecked={false}
-                    type="checkbox"
-                    className="checkbox"
-                    // id={name}
-                  />
-                  <StyledCheckbox
-                    checked={false}
+    <S.Container>
+      <S.SearchBar placeholder="브랜드로 검색하기" />
+      <S.CategoryList>
+        {checkboxInfo &&
+          checkboxInfo.map(([name, val], index) => {
+            return (
+              <S.Category key={index}>
+                <S.CheckboxContainer className="checkboxContainer">
+                  <S.HiddenCheckbox defaultChecked={val.checked} type="checkbox" className="checkbox" id={name} />
+                  <S.StyledCheckbox
+                    checked={val.checked}
                     // onClick={checkCurrentCategory}
                   >
-                    <Icon viewBox="0 0 24 24">
+                    <S.Icon viewBox="0 0 24 24">
                       <polyline points="19 7 10 17 5 12" />
-                    </Icon>
-                  </StyledCheckbox>
-                </CheckboxContainer>
-                <CheckboxName>test</CheckboxName>
-              </Category>
-        </CategoryList>
-    </Container>
+                    </S.Icon>
+                  </S.StyledCheckbox>
+                </S.CheckboxContainer>
+                <S.CheckboxName>{name}</S.CheckboxName>
+              </S.Category>
+            );
+          })}
+      </S.CategoryList>
+    </S.Container>
   );
 };
 
