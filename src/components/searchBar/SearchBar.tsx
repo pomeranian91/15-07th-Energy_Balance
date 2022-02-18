@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
 import { NutrientsListType } from '../../api/getNutrientsList';
 
@@ -8,6 +8,8 @@ interface Props {
 }
 
 const SearchBar = ({ defaultNutrientsList, handleSubmitSearchValue }: Props) => {
+  const [nutrientsList, setNutrientsList] = useState(defaultNutrientsList);
+  const [isClientSearching, setIsClientSearching] = useState(false);
   /* const handleSubmitSearchValue = (e: any): void => {
     // React.FormEvent<HTMLFormElement> //any 타입 임시
     e.preventDefault();
@@ -18,29 +20,66 @@ const SearchBar = ({ defaultNutrientsList, handleSubmitSearchValue }: Props) => 
     }
   }; */
 
+  const handleChangeSearchValue = (event: ChangeEvent<HTMLInputElement>): void => {
+    console.log(event.target.value);
+    if (event.target.value === '') {
+      setIsClientSearching(false);
+    } else {
+      setIsClientSearching(true);
+    }
+    const filteredNutrients = defaultNutrientsList?.filter((nutrients) => nutrients.name.includes(event.target.value));
+    if (filteredNutrients) {
+      if (filteredNutrients.length > 10) {
+        setNutrientsList(filteredNutrients.slice(0, 10));
+      } else {
+        setNutrientsList(filteredNutrients);
+      }
+    }
+    console.log(filteredNutrients);
+  };
+
+  const clientSearching = () => {
+    setIsClientSearching(true);
+  };
+
   return (
-    <>
+    <SearchBarWrapper>
       <SearchBarForm onSubmit={(e) => handleSubmitSearchValue(e)}>
-        <SearchInput placeholder="Energy Balnace 제품 검색하기"></SearchInput>
+        <SearchInput onChange={handleChangeSearchValue} placeholder="Energy Balnace 제품 검색하기"></SearchInput>
         {/* <button type="submit">
           <SearchIcon alt="search-icon" src="/images/icon-search.jpg" />
         </button> */}
       </SearchBarForm>
-    </>
+      {isClientSearching && (
+        <SerachResultUl>
+          {nutrientsList?.map((nutrients) => (
+            <li key={nutrients.id}>{nutrients.name}</li>
+          ))}
+        </SerachResultUl>
+      )}
+    </SearchBarWrapper>
   );
 };
 
+const SearchBarWrapper = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
 const SearchBarForm = styled.form`
   width: 561px;
-  margin: 0 auto;
-  padding: 20px 0;
+  padding-top: 40px;
+  box-sizing: border-box;
 `;
 
 const SearchInput = styled.input`
   width: 100%;
   height: 44px;
   padding: 0 40px;
+  box-sizing: border-box;
   border-radius: 22px;
+  background-color: #ffffff;
 `;
 
 const SearchIcon = styled.img`
@@ -48,4 +87,13 @@ const SearchIcon = styled.img`
   height: 20px;
 `;
 
+const SerachResultUl = styled.ul`
+  width: 561px;
+  margin: 0;
+  margin-top: 3px;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: whitesmoke; //#ffffff;
+  list-style: none;
+`;
 export default SearchBar;

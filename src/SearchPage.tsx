@@ -20,7 +20,6 @@ const SearchPage = () => {
       //any 타입 임시
       // => React.FormEvent<HTMLFormElement>
       e.preventDefault();
-      console.dir(e.target);
       const { value } = e.target[0];
       if (!value || value === ' ') return;
       const filteredNutrients = defaultNutrientsList?.filter((nutrients) => nutrients.name.includes(value));
