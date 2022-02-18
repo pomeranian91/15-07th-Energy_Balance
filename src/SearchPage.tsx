@@ -28,8 +28,6 @@ const SearchPage: React.FC = () => {
     getAsyncNutrientsList();
   }, []);
 
-  console.log(nutrientsList);
-
   return (
     <div className="App">
       <SearchBar
