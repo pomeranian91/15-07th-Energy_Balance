@@ -28,7 +28,9 @@ const Categories: React.FC<CategoriesProps> = ({ nutrientsList, changeNutrientsL
                     </S.Icon>
                   </S.StyledCheckbox>
                 </S.CheckboxContainer>
-                <S.CheckboxName>{name}</S.CheckboxName>
+                <S.CheckboxName>
+                  {name} <span className="productNum">({val.cnt})</span>
+                </S.CheckboxName>
               </S.Category>
             );
           })}
