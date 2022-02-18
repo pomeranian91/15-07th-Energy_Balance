@@ -12,6 +12,7 @@ const ProductList = ({ nutrientsList }: Props) => {
 
   const indexOfLastPost = currentPage * postPerPage;
   const indexOfFirstPost = indexOfLastPost - postPerPage;
+  console.log(nutrientsList);
   // const currentPosts = nutrientsList.slice(indexOfFirstPost, indexOfLastPost);
   // const paginate = pageNum => setCurrentPage(pageNum);
   if (nutrientsList) {
