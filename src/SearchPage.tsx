@@ -1,12 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import Categories from './components/categories/Categories';
 import ProductList from './components/productList/ProductList';
 import SearchBar from './components/searchBar/SearchBar';
 import { getNutrientsList, NutrientsListType } from './api/getNutrientsList';
-import { useEffect } from 'react';
 
-const SearchPage = () => {
+const SearchPage: React.FC = () => {
   const [defaultNutrientsList, setDefaultNutrientsList] = useState<NutrientsListType[] | null>(null); // 고정된 nuetrientsList mount이외에 setNutrientsList
   const [nutrientsList, setNutrientsList] = useState<NutrientsListType[] | null>(null); // 용우님이 실제 mapping하실 때 사용할 useState
 
@@ -41,7 +40,10 @@ const SearchPage = () => {
         changeNutrientsList={changeNutrientsList}
         handleSubmitSearchValue={handleSubmitSearchValue}
       />
-      <Categories />
+      <Categories 
+        nutrientsList={defaultNutrientsList ? defaultNutrientsList : nutrientsList}
+        changeNutrientsList={changeNutrientsList}
+      />
       <ProductList />
     </div>
   );
