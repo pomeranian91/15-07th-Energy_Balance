@@ -59,6 +59,7 @@ const SearchBar = ({ defaultNutrientsList, changeNutrientsList, changeCurrentKye
     if (filteredNutrients) {
       changeNutrientsList(filteredNutrients);
       setIsClientSearching(false);
+      setSearchName('');
     }
   };
 
