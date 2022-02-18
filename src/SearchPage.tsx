@@ -33,7 +33,7 @@ const SearchPage = () => {
     };
     getAsyncNutrientsList();
   }, []);
-  console.log(1)
+
   return (
     <div className="App">
       <SearchBar
@@ -42,7 +42,7 @@ const SearchPage = () => {
         handleSubmitSearchValue={handleSubmitSearchValue}
       />
       <Categories />
-      <ProductList />
+      <ProductList nutrientsList={nutrientsList} />
     </div>
   );
 };
