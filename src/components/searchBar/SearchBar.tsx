@@ -1,4 +1,4 @@
-import React, { ChangeEvent, MouseEventHandler, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { NutrientsListType } from '../../api/getNutrientsList';
 
@@ -13,6 +13,11 @@ const SearchBar = ({ defaultNutrientsList, changeNutrientsList, changeCurrentKye
   const [searchName, setSearchName] = useState<string>('');
   const [isClientSearching, setIsClientSearching] = useState<boolean>(false);
 
+  const getFilterNutrientsName = (searchValue: string): NutrientsListType[] | undefined => {
+    const filteredNutrients = defaultNutrientsList?.filter((nutrients) => nutrients.name.includes(searchValue));
+    return filteredNutrients;
+  };
+
   const handleSubmitSearchValue = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     const formTarget = e.target as HTMLFormElement;
@@ -21,44 +26,40 @@ const SearchBar = ({ defaultNutrientsList, changeNutrientsList, changeCurrentKye
     setIsClientSearching(false);
     changeCurrentKyeword(value); // PR 충돌
     if (!value || value === ' ') return;
-    const filteredNutrients = defaultNutrientsList?.filter((nutrients) => nutrients.name.includes(value));
+    const filteredNutrients = getFilterNutrientsName(value);
     if (filteredNutrients?.length) {
-      changeNutrientsList(filteredNutrients); //이 함수 안에 setState값이 들어있어서 일단 밖으로
+      changeNutrientsList(filteredNutrients);
     } else {
       console.log(`"${value}"에 해당하는 제품을 찾을 수 없습니다.`);
     }
     setSearchName('');
   };
 
-  const handleChangeSearchValue = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    setSearchName(event.target.value);
-    if (event.target.value === '') {
+  const handleChangeSearchValue = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const { value } = e.target;
+    setSearchName(value);
+    if (value === '') {
       setIsClientSearching(false);
     } else {
       setIsClientSearching(true);
     }
-    const filteredNutrients = defaultNutrientsList?.filter((nutrients) => nutrients.name.includes(event.target.value));
+    const filteredNutrients = getFilterNutrientsName(value);
     if (filteredNutrients) {
       if (filteredNutrients.length > 10) {
         setNutrientsList(filteredNutrients.slice(0, 10));
       } else {
         setNutrientsList(filteredNutrients);
       }
-    }
-  };
-
-  const clientSearching = () => {
-    setIsClientSearching(true);
+    } else return;
   };
 
   const liClickChangeList = (e: React.MouseEvent<HTMLLIElement>) => {
     const listElement = e.target as HTMLLIElement;
-    const filteredNutrients = defaultNutrientsList?.filter((nutrients) =>
-      nutrients.name.includes(listElement.innerText),
-    );
+    const filteredNutrients = getFilterNutrientsName(listElement.innerText);
     if (filteredNutrients) {
       changeNutrientsList(filteredNutrients);
       setIsClientSearching(false);
+      setSearchName('');
     }
   };
 
