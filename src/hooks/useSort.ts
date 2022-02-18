@@ -1,29 +1,31 @@
 import { useState, useEffect } from 'react';
-import { ascendKR } from '../utils/sort';
+import { ascendKR, descendKR } from '../utils/sort';
 import type { NutrientsListType } from '../api/getNutrientsList';
 
 type SortType = { name: string; selected: boolean };
 
-const useSort = (nuturientsList: NutrientsListType[] | null) => {
+const useSort = (
+  nuturientsList: NutrientsListType[] | null,
+  changeNutrientsList: (targetNutrientsList: NutrientsListType[] | undefined) => void,
+) => {
   const [initialNutrientsList, setInitialNutrientsList] = useState<NutrientsListType[] | null>(null);
-  const [sortList, setSortList] = useState<SortType[]>([{ name: '가나다 순(역순)', selected: false }]);
+  const [sortList, setSortList] = useState<SortType[]>([{ name: '역순(KR)', selected: false }]);
 
-  const sortByCurrentSelectedElem = (sort: string) => {
+  const sortByCurrentSelectedElem = (sort: string, isSelected: boolean | undefined) => {
     let newNutrientsList: NutrientsListType[] | undefined = [];
     switch (sort) {
-      case '가나다 순(역순)':
-        newNutrientsList = initialNutrientsList?.sort(ascendKR);
+      case '역순(KR)':
+        newNutrientsList = isSelected ? initialNutrientsList?.sort(descendKR) : initialNutrientsList?.sort(ascendKR);
         break;
       default:
         break;
     }
-    console.log(newNutrientsList);
-    return newNutrientsList;
+    changeNutrientsList(newNutrientsList);
   };
 
   const selectSort = (e: React.MouseEvent<HTMLUListElement, MouseEvent>) => {
     const currentSelectedSort = e.target as HTMLUListElement;
-    let isSelected: boolean;
+    let isSelected;
 
     if (sortList) {
       const newSortList = sortList?.map((sort) => {
@@ -38,7 +40,7 @@ const useSort = (nuturientsList: NutrientsListType[] | null) => {
 
       newSortList && setSortList(newSortList as SortType[]);
 
-      sortByCurrentSelectedElem(currentSelectedSort.id);
+      sortByCurrentSelectedElem(currentSelectedSort.id, isSelected);
     }
   };
 
