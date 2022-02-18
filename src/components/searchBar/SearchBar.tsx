@@ -70,14 +70,12 @@ const SearchBarWrapper = styled.section`
 const SearchBarForm = styled.form`
   width: 561px;
   padding-top: 40px;
-  box-sizing: border-box;
 `;
 
 const SearchInput = styled.input`
   width: 100%;
   height: 44px;
   padding: 0 40px;
-  box-sizing: border-box;
   border-radius: 22px;
   background-color: #ffffff;
 `;
@@ -92,8 +90,8 @@ const SerachResultUl = styled.ul`
   margin: 0;
   margin-top: 3px;
   padding: 20px;
-  box-sizing: border-box;
   background-color: whitesmoke; //#ffffff;
   list-style: none;
 `;
+
 export default SearchBar;
