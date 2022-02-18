@@ -12,11 +12,11 @@ const SearchBar = ({ defaultNutrientsList, changeNutrientsList, changeCurrentKye
   const [nutrientsList, setNutrientsList] = useState<NutrientsListType[] | null>(defaultNutrientsList);
   const [isClientSearching, setIsClientSearching] = useState<boolean>(false);
 
-  const handleSubmitSearchValue = (e: any): void => {
-    //any 타입 임시
-    // => React.FormEvent<HTMLFormElement>
+  const handleSubmitSearchValue = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    const { value } = e.target[0];
+    const formTarget = e.target as HTMLFormElement;
+    const inputTarget = formTarget[0] as HTMLInputElement;
+    const { value } = inputTarget;
     setIsClientSearching(false);
     changeCurrentKyeword(value); // PR 충돌
     if (!value || value === ' ') return;
@@ -62,7 +62,7 @@ const SearchBar = ({ defaultNutrientsList, changeNutrientsList, changeCurrentKye
   return (
     <SearchBarWrapper>
       <SearchBarForm onSubmit={(e) => handleSubmitSearchValue(e)}>
-        <SearchInput onChange={handleChangeSearchValue} placeholder="Energy Balnace 제품 검색하기"></SearchInput>
+        <SearchInput onChange={handleChangeSearchValue} placeholder="Energy Balnace 제품명 검색하기"></SearchInput>
         <SearchBtn type="submit">
           <SearchIcon alt="search-icon" src="/images/icon-search.jpg" />
         </SearchBtn>
@@ -118,15 +118,15 @@ const SerachResultUl = styled.ul`
   width: 561px;
   min-height: 200px;
   margin: 0;
-  padding: 20px 0;
+  padding: 10px 0;
   background-color: whitesmoke; //#ffffff;
   list-style: none;
   z-index: 99;
 `;
 
 const SearchResultLi = styled.li`
-  margin: 5px 0;
-  padding: 3px 20px;
+  padding: 6px 20px;
+  cursor: pointer;
   &:hover {
     background: #dbdbdb;
   }
