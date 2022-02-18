@@ -4,6 +4,7 @@ import ProductList from './components/productList/ProductList';
 import SearchBar from './components/searchBar/SearchBar';
 import { getNutrientsList, NutrientsListType } from './api/getNutrientsList';
 import { DefaultDeserializer } from 'v8';
+import styled from 'styled-components';
 
 const SearchPage: React.FC = () => {
   const [defaultNutrientsList, setDefaultNutrientsList] = useState<NutrientsListType[] | null>(null); // 고정된 nuetrientsList mount이외에 setNutrientsList
@@ -14,7 +15,7 @@ const SearchPage: React.FC = () => {
     console.log('용우님이 쓰실 필터된 객체배열입니다.', targetNutrientsList);
     setNutrientsList(targetNutrientsList);
   };
-  
+
   const handleSubmitSearchValue = useCallback(
     (e: any): void => {
       //any 타입 임시
@@ -45,14 +46,19 @@ const SearchPage: React.FC = () => {
   return (
     <div className="App">
       <SearchBar defaultNutrientsList={defaultNutrientsList} handleSubmitSearchValue={handleSubmitSearchValue} />
-      <Categories
-        nutrientsList={nutrientsList}
-        changeNutrientsList={changeNutrientsList}
-        currentKeyword={currentKeyword}
-      />
-      <ProductList />
+      <Layout>
+        <Categories
+          nutrientsList={nutrientsList}
+          changeNutrientsList={changeNutrientsList}
+          currentKeyword={currentKeyword}
+        />
+        <ProductList nutrientsList={nutrientsList} />
+      </Layout>
     </div>
   );
 };
 
+const Layout = styled.div`
+  display: flex;
+`;
 export default SearchPage;
