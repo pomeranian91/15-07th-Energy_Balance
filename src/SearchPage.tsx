@@ -1,10 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import styled from 'styled-components';
+import Sort from './components/sort/Sort';
 import Categories from './components/categories/Categories';
 import ProductList from './components/productList/ProductList';
 import SearchBar from './components/searchBar/SearchBar';
 import { getNutrientsList, NutrientsListType } from './api/getNutrientsList';
-import { DefaultDeserializer } from 'v8';
-import styled from 'styled-components';
+
 
 const SearchPage: React.FC = () => {
   const [defaultNutrientsList, setDefaultNutrientsList] = useState<NutrientsListType[] | null>(null); // 고정된 nuetrientsList mount이외에 setNutrientsList
@@ -45,8 +46,13 @@ const SearchPage: React.FC = () => {
 
   return (
     <div className="App">
-      <SearchBar defaultNutrientsList={defaultNutrientsList} handleSubmitSearchValue={handleSubmitSearchValue} />
+      <SearchBar
+        nutrientsList={nutrientsList}
+        changeNutrientsList={changeNutrientsList}
+        handleSubmitSearchValue={handleSubmitSearchValue}
+      />
       <Layout>
+        <Sort nutrientsList={nutrientsList} changeNutrientsList={changeNutrientsList} />
         <Categories
           nutrientsList={nutrientsList}
           changeNutrientsList={changeNutrientsList}
