@@ -10,6 +10,7 @@ interface SearchBarProps {
 
 const SearchBar = ({ defaultNutrientsList, changeNutrientsList, changeCurrentKyeword }: SearchBarProps) => {
   const [nutrientsList, setNutrientsList] = useState<NutrientsListType[] | null>(defaultNutrientsList);
+  const [searchName, setSearchName] = useState<string>('');
   const [isClientSearching, setIsClientSearching] = useState<boolean>(false);
 
   const handleSubmitSearchValue = (e: React.FormEvent<HTMLFormElement>): void => {
@@ -26,9 +27,11 @@ const SearchBar = ({ defaultNutrientsList, changeNutrientsList, changeCurrentKye
     } else {
       console.log(`"${value}"에 해당하는 제품을 찾을 수 없습니다.`);
     }
+    setSearchName('');
   };
 
   const handleChangeSearchValue = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    setSearchName(event.target.value);
     if (event.target.value === '') {
       setIsClientSearching(false);
     } else {
@@ -62,7 +65,11 @@ const SearchBar = ({ defaultNutrientsList, changeNutrientsList, changeCurrentKye
   return (
     <SearchBarWrapper>
       <SearchBarForm onSubmit={(e) => handleSubmitSearchValue(e)}>
-        <SearchInput onChange={handleChangeSearchValue} placeholder="Energy Balnace 제품명 검색하기"></SearchInput>
+        <SearchInput
+          onChange={handleChangeSearchValue}
+          value={searchName}
+          placeholder="Energy Balnace 제품명 검색하기"
+        ></SearchInput>
         <SearchBtn type="submit">
           <SearchIcon alt="search-icon" src="/images/icon-search.jpg" />
         </SearchBtn>
