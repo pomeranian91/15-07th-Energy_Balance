@@ -5,32 +5,33 @@ import styled from 'styled-components';
 interface Props {
   nutrientsList: NutrientsListType[] | null;
   postPerPage: number;
-  totalPosts: number;
+  totalPosts?: number | undefined | null;
   paginate: any;
 }
 
 const Pagination = ({ paginate, postPerPage, nutrientsList, totalPosts }: Props) => {
   const pageNumbers: number[] = [];
-  console.log(1);
-  for (let i = 1; i < Math.ceil(totalPosts / postPerPage); i++) {
-    pageNumbers.push(i);
-  }
-  if (nutrientsList) {
-    return (
-      <div>
-        {pageNumbers != [] ? (
-          <ListContainer>
-            {pageNumbers.map((pageNum: number) => (
-              <List key={pageNum} onClick={() => paginate(pageNum)}>
-                <span>{pageNum}</span>
-              </List>
-            ))}
-          </ListContainer>
-        ) : (
-          <div>test</div>
-        )}
-      </div>
-    );
+  if (totalPosts) {
+    for (let i = 1; i < Math.ceil(totalPosts / postPerPage); i++) {
+      pageNumbers.push(i);
+    }
+    if (nutrientsList) {
+      return (
+        <div>
+          {pageNumbers != [] ? (
+            <ListContainer>
+              {pageNumbers.map((pageNum: number) => (
+                <List key={pageNum} onClick={() => paginate(pageNum)}>
+                  <span>{pageNum}</span>
+                </List>
+              ))}
+            </ListContainer>
+          ) : (
+            <div>test</div>
+          )}
+        </div>
+      );
+    } else return null;
   } else return null;
 };
 const ListContainer = styled.ul`
