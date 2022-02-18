@@ -29,26 +29,44 @@ const SearchPage: React.FC = () => {
   }, []);
 
   return (
-    <div className="App">
+    <Container>
       <SearchBar
         defaultNutrientsList={defaultNutrientsList}
         changeNutrientsList={changeNutrientsList}
         changeCurrentKyeword={changeCurrentKyeword}
       />
+      <Sort nutrientsList={nutrientsList} changeNutrientsList={changeNutrientsList} />
+
       <Layout>
-        <Sort nutrientsList={nutrientsList} changeNutrientsList={changeNutrientsList} />
         <Categories
           nutrientsList={nutrientsList}
           changeNutrientsList={changeNutrientsList}
           currentKeyword={currentKeyword}
         />
-        <ProductList nutrientsList={nutrientsList} />
+        <ProductLayout>
+          <ProductList nutrientsList={nutrientsList} />
+        </ProductLayout>
       </Layout>
-    </div>
+    </Container>
   );
 };
-
+const Container = styled.div`
+  min-height: 1000px;
+  background: #f2e9e4;
+`;
 const Layout = styled.div`
   display: flex;
+  justify-content: center;
+  margin-left: 20px;
+  padding-left: 30px;
+  margin-right: 20px;
+  padding-right: 30px;
+  border-radius: 10px;
+  background: #d9c7c1;
+  box-shadow: -2px -2px 5px rgba(245, 245, 245, 0.9), 3px 3px 5px rgba(3, 3, 3, 0.2);
+  @media screen and (max-width: 1024px) {
+    flex-direction: column;
+  }
 `;
+const ProductLayout = styled.div``;
 export default SearchPage;
