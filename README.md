@@ -1,5 +1,4 @@
 # Team15-wanted-pre-onboarding-15_07th_Energy_Balance
-# Team15-wanted-pre-onboarding-15_07th_Energy_Balance
 ## **1. 💁 프로젝트 소개**
 
 - 주제 : 3주차 에너지 밸런스 프로젝트
@@ -7,21 +6,21 @@
 
 ---
 
-## 2**. 🛠️ 기술 스택**
 
 <p align="center">
-<img alt="html" src="[https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)" />
-<img alt="css3" src = "[https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)" />
-<img alt="JavaScript" src="[https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)" />
-<img alt="TypeScript" src = "[https://img.shields.io/badge/TypeScript-%231572B6.svg?style=for-the-badge&logo=TypeScript&logoColor=white](https://img.shields.io/badge/TypeScript-%231572B6.svg?style=for-the-badge&logo=TypeScript&logoColor=white)" />
-<img alt="React" src="[https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)" />
-<img alt="styled" src="[https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white](https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white)" />
+<img alt="JavaScript" src="https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E" />
+<img alt="TypeScript" src = "https://img.shields.io/badge/TypeScript-%231572B6.svg?style=for-the-badge&logo=TypeScript&logoColor=white" />
+<img alt="React" src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB" />
+<img alt="styled" src="https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white" />  
 </p>
 
 ---
 
-## 3**. 👋🏻 팀원 소개**
+## 3. 👋🏻 팀원 소개
 
+|조은총|최병현|조용우|
+|----|---|---|
+|<img width="200px" src='https://avatars.githubusercontent.com/u/66837741?v=4'/>|<img width="200px" src="https://avatars.githubusercontent.com/u/65222200?v=4"/>|<img width="200px" src='https://avatars.githubusercontent.com/u/89348550?v=4'>|
 ---
 
 ## 4**. 🔗 배포 링크**
