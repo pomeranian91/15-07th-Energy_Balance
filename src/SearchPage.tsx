@@ -12,7 +12,6 @@ const SearchPage: React.FC = () => {
   const [currentKeyword, setCurrentKeyword] = useState<string>('');
 
   const changeNutrientsList = (targetNutrientsList: NutrientsListType[]): void => {
-    console.log('용우님이 쓰실 필터된 객체배열입니다.', targetNutrientsList);
     setNutrientsList(targetNutrientsList);
   };
 
@@ -28,9 +27,9 @@ const SearchPage: React.FC = () => {
     };
     getAsyncNutrientsList();
   }, []);
-
-  console.log(nutrientsList);
-
+  useEffect(() => {
+    console.log(nutrientsList);
+  }, [nutrientsList]);
   return (
     <div className="App">
       <SearchBar
@@ -38,8 +37,9 @@ const SearchPage: React.FC = () => {
         changeNutrientsList={changeNutrientsList}
         changeCurrentKyeword={changeCurrentKyeword}
       />
+      <Sort nutrientsList={nutrientsList} changeNutrientsList={changeNutrientsList} />
+
       <Layout>
-        <Sort nutrientsList={nutrientsList} changeNutrientsList={changeNutrientsList} />
         <Categories
           nutrientsList={nutrientsList}
           changeNutrientsList={changeNutrientsList}
@@ -53,5 +53,15 @@ const SearchPage: React.FC = () => {
 
 const Layout = styled.div`
   display: flex;
+  z-index: 5;
 `;
+// const Test = styled.video`
+//   // position: absolute;
+//   // top: 0;
+//   // left: 0;
+//   // width: 100%;
+//   // height: 100%;
+//   // background: url(https://source.unsplash.com/random/1920x1080);
+//   // background-size: cover;
+// `;
 export default SearchPage;

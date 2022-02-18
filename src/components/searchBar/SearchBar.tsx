@@ -115,9 +115,10 @@ const SearchIcon = styled.img`
 const SerachResultUl = styled.ul`
   position: absolute;
   top: 85px;
-  width: 561px;
+  width: 510px;
   min-height: 200px;
   margin: 0;
+  margin-right: 20px;
   padding: 20px 0;
   background-color: whitesmoke; //#ffffff;
   list-style: none;
