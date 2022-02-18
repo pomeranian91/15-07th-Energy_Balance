@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import type { NutrientsListType } from '../api/getNutrientsList';
+import type { CategoriesProps } from '../components/categories/Categories.type';
 import { getTarget } from '../utils/getTarget';
 
 type checkboxInfo = { checked: boolean; cnt?: number };
 
-const useCategories = (nutrientsList: NutrientsListType[] | null) => {
-  const [initialNutrientsList, setInitialNutientsList] = useState<NutrientsListType | null>(null);
+const useCategories = ({ nutrientsList, changeNutrientsList }: CategoriesProps) => {
   const [checkboxInfoList, setCheckboxInfoList] = useState<[any, checkboxInfo][] | null>(null);
   const [checkboxInfo, setCheckboxInfo] = useState<Map<any, checkboxInfo> | null | undefined>(null);
 
@@ -41,6 +41,14 @@ const useCategories = (nutrientsList: NutrientsListType[] | null) => {
     setCheckboxInfo(newCheckboxInfo);
   };
 
+  const updateNutrientsList = (checkboxInfoList: [any, checkboxInfo][] | null) => {
+    const selectedBrands = checkboxInfoList?.filter(([key, val]) => val.checked).map((info) => info[0]);
+
+    const newNutrientsList = nutrientsList?.filter((nutrients) => selectedBrands?.includes(nutrients.brand));
+
+    return newNutrientsList;
+  };
+
   useEffect(() => {
     if (nutrientsList) {
       const newCheckboxInfo = filterCheckboxInfo(nutrientsList);
@@ -50,12 +58,18 @@ const useCategories = (nutrientsList: NutrientsListType[] | null) => {
   }, [nutrientsList]);
 
   useEffect(() => {
-    console.log(checkboxInfo);
     if (checkboxInfo) {
       const newCheckboxInfoList = checkboxInfo && Array.from(checkboxInfo);
       setCheckboxInfoList(newCheckboxInfoList);
     }
   }, [checkboxInfo]);
+
+  useEffect(() => {
+    if (checkboxInfoList) {
+      const updatedNutrientsList = updateNutrientsList(checkboxInfoList);
+      changeNutrientsList(updatedNutrientsList);
+    }
+  }, [checkboxInfoList]);
 
   return { checkboxInfoList, checkCurrentCategory };
 };

@@ -2,10 +2,9 @@ import React from 'react';
 import * as S from './Categories.style';
 import useCategories from '../../hooks/useCategories';
 import type { CategoriesProps } from './Categories.type';
-import { NutrientsListType } from '../../api/getNutrientsList';
 
 const Categories: React.FC<CategoriesProps> = ({ nutrientsList, changeNutrientsList }: CategoriesProps) => {
-  const { checkboxInfoList, checkCurrentCategory } = useCategories(nutrientsList);
+  const { checkboxInfoList, checkCurrentCategory } = useCategories({ nutrientsList, changeNutrientsList });
 
   return (
     <S.Container>
