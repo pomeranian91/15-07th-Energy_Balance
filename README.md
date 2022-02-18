@@ -24,7 +24,7 @@
 
 ## 4. 🔗 배포 링크
 
-[배포 링크 바로가기]
+[배포 링크 바로가기](https://energy-banlance.herokuapp.com/)
 
 ---
 
