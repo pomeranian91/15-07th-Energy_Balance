@@ -20,7 +20,7 @@ const useSort = (
       default:
         break;
     }
-    changeNutrientsList(newNutrientsList);
+    newNutrientsList && changeNutrientsList(newNutrientsList);
   };
 
   const selectSort = (e: React.MouseEvent<HTMLUListElement, MouseEvent>) => {
@@ -46,7 +46,7 @@ const useSort = (
 
   useEffect(() => {
     if (nuturientsList) {
-      setInitialNutrientsList(nuturientsList);
+      setInitialNutrientsList([...nuturientsList]);
     }
   }, [nuturientsList]);
 
