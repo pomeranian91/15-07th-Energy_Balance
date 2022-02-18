@@ -22,45 +22,49 @@ const Categories: React.FC<CategoriesProps> = ({
   return (
     <S.Container>
       <S.SearchBar placeholder="브랜드로 검색하기" onChange={searchTargetBrand} />
-      <S.CategoryList>
-        {checkCurrentCheckboxSort()
-          ? checkboxInfoList &&
-            checkboxInfoList.map(([name, val], index) => {
-              return (
-                <S.Category key={index}>
-                  <S.CheckboxContainer className="checkboxContainer">
-                    <S.HiddenCheckbox defaultChecked={val.checked} type="checkbox" className="checkbox" id={name} />
-                    <S.StyledCheckbox checked={val.checked} onClick={checkCurrentCategory}>
-                      <S.Icon viewBox="0 0 24 24">
-                        <polyline points="19 7 10 17 5 12" />
-                      </S.Icon>
-                    </S.StyledCheckbox>
-                  </S.CheckboxContainer>
-                  <S.CheckboxName>
-                    {name} <span className="productNum">({val.cnt})</span>
-                  </S.CheckboxName>
-                </S.Category>
-              );
-            })
-          : searchCheckboxInfoList &&
-            searchCheckboxInfoList.map(([name, val], index) => {
-              return (
-                <S.Category key={index}>
-                  <S.CheckboxContainer className="checkboxContainer">
-                    <S.HiddenCheckbox defaultChecked={val.checked} type="checkbox" className="checkbox" id={name} />
-                    <S.StyledCheckbox checked={val.checked} onClick={checkCurrentCategory}>
-                      <S.Icon viewBox="0 0 24 24">
-                        <polyline points="19 7 10 17 5 12" />
-                      </S.Icon>
-                    </S.StyledCheckbox>
-                  </S.CheckboxContainer>
-                  <S.CheckboxName>
-                    {name} <span className="productNum">({val.cnt})</span>
-                  </S.CheckboxName>
-                </S.Category>
-              );
-            })}
-      </S.CategoryList>
+      {checkboxInfoList?.length === 0 || searchCheckboxInfoList?.length ? (
+        <S.InfoForEmpty>브랜드가 없습니다</S.InfoForEmpty>
+      ) : (
+        <S.CategoryList>
+          {checkCurrentCheckboxSort()
+            ? checkboxInfoList &&
+              checkboxInfoList.map(([name, val], index) => {
+                return (
+                  <S.Category key={index}>
+                    <S.CheckboxContainer className="checkboxContainer">
+                      <S.HiddenCheckbox defaultChecked={val.checked} type="checkbox" className="checkbox" id={name} />
+                      <S.StyledCheckbox checked={val.checked} onClick={checkCurrentCategory}>
+                        <S.Icon viewBox="0 0 24 24">
+                          <polyline points="19 7 10 17 5 12" />
+                        </S.Icon>
+                      </S.StyledCheckbox>
+                    </S.CheckboxContainer>
+                    <S.CheckboxName>
+                      {name} <span className="productNum">({val.cnt})</span>
+                    </S.CheckboxName>
+                  </S.Category>
+                );
+              })
+            : searchCheckboxInfoList &&
+              searchCheckboxInfoList.map(([name, val], index) => {
+                return (
+                  <S.Category key={index}>
+                    <S.CheckboxContainer className="checkboxContainer">
+                      <S.HiddenCheckbox defaultChecked={val.checked} type="checkbox" className="checkbox" id={name} />
+                      <S.StyledCheckbox checked={val.checked} onClick={checkCurrentCategory}>
+                        <S.Icon viewBox="0 0 24 24">
+                          <polyline points="19 7 10 17 5 12" />
+                        </S.Icon>
+                      </S.StyledCheckbox>
+                    </S.CheckboxContainer>
+                    <S.CheckboxName>
+                      {name} <span className="productNum">({val.cnt})</span>
+                    </S.CheckboxName>
+                  </S.Category>
+                );
+              })}
+        </S.CategoryList>
+      )}
     </S.Container>
   );
 };

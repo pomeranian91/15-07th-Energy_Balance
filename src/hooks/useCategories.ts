@@ -104,8 +104,10 @@ const useCategories = ({ nutrientsList, changeNutrientsList, currentKeyword }: C
       const updatedNutrientsList = updateNutrientsList(checkboxInfoList);
       const emptyNutrientsList = updatedNutrientsList?.length === 0;
 
-      if (emptyNutrientsList) changeNutrientsList(initialNutrientsList as NutrientsListType[]);
-      else changeNutrientsList(updatedNutrientsList);
+      if (emptyNutrientsList) {
+        if (currentKeyword === 'initial') return;
+        changeNutrientsList(initialNutrientsList as NutrientsListType[]);
+      } else changeNutrientsList(updatedNutrientsList);
     }
   }, [checkboxInfoList]);
 

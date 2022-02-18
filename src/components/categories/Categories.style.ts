@@ -2,9 +2,9 @@ import styled from 'styled-components';
 import type { StyledCheckboxType } from './Categories.type';
 
 export const Container = styled.div`
-  /* 임시 레이아웃 */
   margin-top: 50px;
   margin-left: 100px;
+  /* text-align: center; */
 `;
 
 export const SearchBar = styled.input`
@@ -17,6 +17,16 @@ export const SearchBar = styled.input`
   &:focus {
     outline: none;
   }
+`;
+
+export const InfoForEmpty = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #f8d09a;
 `;
 
 export const CategoryList = styled.ul``;
