@@ -71,11 +71,13 @@ const Card = styled.div`
   justify-content: flex-start;
   min-width: 235px;
   padding: 20px;
+  background-color: #fff;
   box-shadow: -2px -2px 5px rgba(255, 255, 255, 1), 3px 3px 5px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   &: hover {
     box-shadow: inset -2px -2px 5px rgba(255, 255, 255, 1), inset 3px 3px 5px rgba(0, 0, 0, 0.1);
-    transform: scale(0.9);
+    transform: scale(1.2);
+    transition: all 1s;
   }
 `;
 const Title = styled.div`

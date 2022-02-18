@@ -38,7 +38,6 @@ const SearchPage: React.FC = () => {
         changeCurrentKyeword={changeCurrentKyeword}
       />
       <Sort nutrientsList={nutrientsList} changeNutrientsList={changeNutrientsList} />
-
       <Layout>
         <Categories
           nutrientsList={nutrientsList}
@@ -54,6 +53,7 @@ const SearchPage: React.FC = () => {
 const Layout = styled.div`
   display: flex;
   z-index: 5;
+  background-color: ;
 `;
 // const Test = styled.video`
 //   // position: absolute;

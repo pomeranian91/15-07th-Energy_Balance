@@ -2,8 +2,18 @@ import styled from 'styled-components';
 import type { StyledCheckboxType } from './Categories.type';
 
 export const Container = styled.div`
+  max-width: 300px;
+  max-height: 400px;
   margin-top: 50px;
   margin-left: 100px;
+  padding: 30px;
+  border-radius: 50px;
+  background-color: #fff;
+  box-shadow: -4px -4px 8px rgba(250, 250, 250, 1), 6px 6px 5px rgba(0, 0, 0, 0.3);
+  &: hover {
+    box-shadow: inset -2px -2px 5px rgba(255, 255, 255, 1), inset 3px 3px 5px rgba(0, 0, 0, 0.2);
+  }
+
   /* text-align: center; */
 `;
 
