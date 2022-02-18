@@ -8,6 +8,7 @@ type checkboxInfo = { checked: boolean; cnt?: number };
 const useCategories = ({ nutrientsList, changeNutrientsList, currentKeyword }: CategoriesProps) => {
   const [initialNutrientsList, setInitialNutrientsList] = useState<NutrientsListType[] | null>(null);
   const [checkboxInfoList, setCheckboxInfoList] = useState<[any, checkboxInfo][] | null>(null);
+  const [searchCheckboxInfoList, setSearchCheckboxInfoList] = useState<[any, checkboxInfo][] | null | undefined>(null);
   const [checkboxInfo, setCheckboxInfo] = useState<Map<any, checkboxInfo> | null | undefined>(null);
   const [prevKeyword, setPrevKeyword] = useState<string>('initial');
 
@@ -53,6 +54,15 @@ const useCategories = ({ nutrientsList, changeNutrientsList, currentKeyword }: C
     return newNutrientsList;
   };
 
+  const searchTargetBrand = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const keyword = e.target.value;
+    const searchCheckboxInfoList = checkboxInfoList?.filter(
+      (brand) => brand[0].toLocaleLowerCase().indexOf(keyword.toLocaleLowerCase()) > -1,
+    );
+
+    setSearchCheckboxInfoList(searchCheckboxInfoList);
+  };
+
   useEffect(() => {
     if (currentKeyword !== prevKeyword || prevKeyword === 'initial') {
       setInitialNutrientsList(nutrientsList);
@@ -72,7 +82,20 @@ const useCategories = ({ nutrientsList, changeNutrientsList, currentKeyword }: C
   useEffect(() => {
     if (checkboxInfo) {
       const newCheckboxInfoList = checkboxInfo && Array.from(checkboxInfo);
+
       setCheckboxInfoList(newCheckboxInfoList);
+
+      if (searchCheckboxInfoList) {
+        const _newCheckboxInfoList = [];
+
+        for (const product of newCheckboxInfoList) {
+          for (const filteredProduct of searchCheckboxInfoList) {
+            if (filteredProduct[0] === product[0]) _newCheckboxInfoList.push(product);
+          }
+        }
+        console.log(_newCheckboxInfoList);
+        setSearchCheckboxInfoList(_newCheckboxInfoList);
+      }
     }
   }, [checkboxInfo]);
 
@@ -86,7 +109,7 @@ const useCategories = ({ nutrientsList, changeNutrientsList, currentKeyword }: C
     }
   }, [checkboxInfoList]);
 
-  return { checkboxInfoList, checkCurrentCategory };
+  return { checkboxInfoList, searchCheckboxInfoList, checkCurrentCategory, searchTargetBrand };
 };
 
 export default useCategories;
