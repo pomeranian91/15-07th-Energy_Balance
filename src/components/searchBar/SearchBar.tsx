@@ -108,23 +108,26 @@ const SearchInput = styled.input`
 `;
 
 const SearchBtn = styled.button`
+  position: relative;
+  right: 40px;
   padding: 0;
   background-color: initial;
   border-style: none;
+  cursor: pointer;
 `;
 
 const SearchIcon = styled.img`
   width: 20px;
   height: 20px;
-  cursor: pointer;
 `;
 
 const SerachResultUl = styled.ul`
   position: absolute;
   top: 85px;
-  width: 561px;
+  width: 510px;
   min-height: 200px;
   margin: 0;
+  margin-right: 18px;
   padding: 10px 0;
   background-color: whitesmoke; //#ffffff;
   list-style: none;
