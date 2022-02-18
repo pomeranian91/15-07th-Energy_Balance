@@ -4,21 +4,29 @@ import { NutrientsListType } from '../../api/getNutrientsList';
 
 interface Props {
   defaultNutrientsList: NutrientsListType[] | null;
-  handleSubmitSearchValue(e: any): void;
+  changeNutrientsList(targetNutrientsList: NutrientsListType[]): void;
+  changeCurrentKyeword(value: string): void;
 }
 
-const SearchBar = ({ defaultNutrientsList, handleSubmitSearchValue }: Props) => {
+const SearchBar = ({ defaultNutrientsList, changeNutrientsList, changeCurrentKyeword }: Props) => {
   const [nutrientsList, setNutrientsList] = useState(defaultNutrientsList);
   const [isClientSearching, setIsClientSearching] = useState(false);
-  /* const handleSubmitSearchValue = (e: any): void => {
-    // React.FormEvent<HTMLFormElement> //any 타입 임시
+
+  const handleSubmitSearchValue = (e: any): void => {
+    //any 타입 임시
+    // => React.FormEvent<HTMLFormElement>
     e.preventDefault();
     const { value } = e.target[0];
+    setIsClientSearching(false);
+    changeCurrentKyeword(value); // PR 충돌
+    if (!value || value === ' ') return;
     const filteredNutrients = defaultNutrientsList?.filter((nutrients) => nutrients.name.includes(value));
-    if (filteredNutrients) {
-      changeNutrientsList(filteredNutrients);
+    if (filteredNutrients?.length) {
+      changeNutrientsList(filteredNutrients); //이 함수 안에 setState값이 들어있어서 일단 밖으로
+    } else {
+      console.log(`"${value}"에 해당하는 제품을 찾을 수 없습니다.`);
     }
-  }; */
+  };
 
   const handleChangeSearchValue = (event: ChangeEvent<HTMLInputElement>): void => {
     console.log(event.target.value);
@@ -42,6 +50,15 @@ const SearchBar = ({ defaultNutrientsList, handleSubmitSearchValue }: Props) => 
     setIsClientSearching(true);
   };
 
+  const liClickChangeList = (e: any) => {
+    console.dir(e.target.innerText); // string
+    const filteredNutrients = defaultNutrientsList?.filter((nutrients) => nutrients.name.includes(e.target.innerText));
+    if (filteredNutrients) {
+      changeNutrientsList(filteredNutrients);
+      setIsClientSearching(false);
+    }
+  };
+
   return (
     <SearchBarWrapper>
       <SearchBarForm onSubmit={(e) => handleSubmitSearchValue(e)}>
@@ -53,7 +70,9 @@ const SearchBar = ({ defaultNutrientsList, handleSubmitSearchValue }: Props) => 
       {isClientSearching && (
         <SerachResultUl>
           {nutrientsList?.map((nutrients) => (
-            <li key={nutrients.id}>{nutrients.name}</li>
+            <SearchResultLi onClick={liClickChangeList} key={nutrients.id}>
+              {nutrients.name}
+            </SearchResultLi>
           ))}
         </SerachResultUl>
       )}
@@ -86,12 +105,23 @@ const SearchIcon = styled.img`
 `;
 
 const SerachResultUl = styled.ul`
+  position: absolute;
+  min-height: 200px;
+  z-index: 99;
+  top: 84px;
   width: 561px;
   margin: 0;
   margin-top: 3px;
   padding: 20px;
   background-color: whitesmoke; //#ffffff;
   list-style: none;
+`;
+
+const SearchResultLi = styled.li`
+  margin: 5px 0;
+  &:hover {
+    background-color: greenyellow;
+  }
 `;
 
 export default SearchBar;
