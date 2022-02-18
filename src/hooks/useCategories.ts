@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react';
 import type { NutrientsListType } from '../api/getNutrientsList';
+import { getTarget } from '../utils/getTarget';
 
-type CheckBoxInfoType = {
-  checked: boolean;
-  cnt: number;
-};
+type checkboxInfo = { checked: boolean; cnt: number };
 
 const useCategories = (nutrientsList: NutrientsListType[] | null) => {
   const [initialNutrientsList, setInitialNutientsList] = useState<NutrientsListType | null>(null);
-  const [checkboxInfo, setCheckboxInfo] = useState<[string, CheckBoxInfoType][] | null>(null);
+  const [checkboxInfoList, setCheckboxInfoList] = useState<[any, checkboxInfo][] | null>(null);
+  const [checkboxInfo, setCheckboxInfo] = useState<Map<any, checkboxInfo> | null>(null);
 
   const filterCheckboxInfo = (nutrientsList: NutrientsListType[]) => {
     const parseCategories = nutrientsList.filter((nutrients) => nutrients.brand);
@@ -24,15 +23,30 @@ const useCategories = (nutrientsList: NutrientsListType[] | null) => {
     return filtedCheckboxInfo;
   };
 
+  const checkCurrentCategory = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const currentClickedTarget = e.target;
+
+    const currentCheckbox = getTarget(currentClickedTarget, 'checkboxContainer').id;
+
+    // setCheckboxInfo();
+  };
+
   useEffect(() => {
     if (nutrientsList) {
-      const newCheckboxInfo = Array.from(filterCheckboxInfo(nutrientsList));
+      const newCheckboxInfo = filterCheckboxInfo(nutrientsList);
 
       setCheckboxInfo(newCheckboxInfo);
     }
   }, [nutrientsList]);
 
-  return { checkboxInfo };
+  useEffect(() => {
+    if (checkboxInfo) {
+      const newCheckboxInfoList = checkboxInfo && Array.from(checkboxInfo);
+      setCheckboxInfoList(newCheckboxInfoList);
+    }
+  }, [checkboxInfo]);
+
+  return { checkboxInfoList, checkCurrentCategory };
 };
 
 export default useCategories;
