@@ -13,7 +13,7 @@ const SearchBar = ({ defaultNutrientsList, changeNutrientsList, changeCurrentKye
   const [searchName, setSearchName] = useState<string>('');
   const [isClientSearching, setIsClientSearching] = useState<boolean>(false);
 
-  const getFilterNutrients = (searchValue: string): NutrientsListType[] | undefined => {
+  const getFilterNutrientsName = (searchValue: string): NutrientsListType[] | undefined => {
     const filteredNutrients = defaultNutrientsList?.filter((nutrients) => nutrients.name.includes(searchValue));
     return filteredNutrients;
   };
@@ -26,7 +26,7 @@ const SearchBar = ({ defaultNutrientsList, changeNutrientsList, changeCurrentKye
     setIsClientSearching(false);
     changeCurrentKyeword(value); // PR 충돌
     if (!value || value === ' ') return;
-    const filteredNutrients = getFilterNutrients(value);
+    const filteredNutrients = getFilterNutrientsName(value);
     if (filteredNutrients?.length) {
       changeNutrientsList(filteredNutrients);
     } else {
@@ -35,26 +35,27 @@ const SearchBar = ({ defaultNutrientsList, changeNutrientsList, changeCurrentKye
     setSearchName('');
   };
 
-  const handleChangeSearchValue = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    setSearchName(event.target.value);
-    if (event.target.value === '') {
+  const handleChangeSearchValue = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const { value } = e.target;
+    setSearchName(value);
+    if (value === '') {
       setIsClientSearching(false);
     } else {
       setIsClientSearching(true);
     }
-    const filteredNutrients = getFilterNutrients(event.target.value);
+    const filteredNutrients = getFilterNutrientsName(value);
     if (filteredNutrients) {
       if (filteredNutrients.length > 10) {
         setNutrientsList(filteredNutrients.slice(0, 10));
       } else {
         setNutrientsList(filteredNutrients);
       }
-    }
+    } else return;
   };
 
   const liClickChangeList = (e: React.MouseEvent<HTMLLIElement>) => {
     const listElement = e.target as HTMLLIElement;
-    const filteredNutrients = getFilterNutrients(listElement.innerText);
+    const filteredNutrients = getFilterNutrientsName(listElement.innerText);
     if (filteredNutrients) {
       changeNutrientsList(filteredNutrients);
       setIsClientSearching(false);
