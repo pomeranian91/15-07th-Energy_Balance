@@ -1,4 +1,4 @@
-# Team15-wanted-pre-onboarding-15_07th_Energy_Balance
+## Team15-wanted-pre-onboarding-15_07th_Energy_Balance
 ## 1. 💁 프로젝트 소개
 
 - 주제 : 3주차 에너지 밸런스 프로젝트
