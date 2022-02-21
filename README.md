@@ -4,7 +4,6 @@
 - 주제 : 3주차 에너지 밸런스 프로젝트
 - 기간 : 22.02.17 ~ 22.02.19
 
----
 ## 2. 🛠️ 기술 스택
 <p align="center">
 <img alt="JavaScript" src="https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E" />
@@ -13,20 +12,16 @@
 <img alt="styled" src="https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white" />  
 </p>
 
----
-
 ## 3. 👋🏻 팀원 소개
 
 |조은총|최병현|조용우|
 |----|---|---|
 |<img width="200px" src='https://avatars.githubusercontent.com/u/66837741?v=4'/>|<img width="200px" src="https://avatars.githubusercontent.com/u/65222200?v=4"/>|<img width="200px" src='https://avatars.githubusercontent.com/u/89348550?v=4'>|
----
 
 ## 4. 🔗 배포 링크
 
 [배포 링크 바로가기](https://energy-banlance.herokuapp.com/)
 
----
 
 ## 5. 📄 기능 목록 명세
 
@@ -65,8 +60,6 @@
 - 반응형 레이아웃 구성(1024px : 카테고리 상단으로 이동, 768px: 카테고리 숨김)
 - 색상 통일화, 테마 설정
 
----
-
 ## 6. 💿 설치 및 실행 방법
 
 Project Clone
@@ -80,8 +73,6 @@ Project Setup
 Project Start For Development
 
 `$ npm start`
-
----
 
 ## 7. 🌲 프로젝트 구조
 
